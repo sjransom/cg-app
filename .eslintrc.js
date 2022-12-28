@@ -25,6 +25,7 @@ module.exports = {
         'no-useless-escape': 2,
         'no-console': 1,
         'no-var': 2,
+        'object-curly-spacing': ['error', 'always'],
         strict: [2, 'global'],
         'comma-dangle': ['error', 'never'],
         'prettier/prettier': 'error'
