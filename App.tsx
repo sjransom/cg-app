@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  Text,
   View
 } from 'react-native'
 import { useAuth0, Auth0Provider } from 'react-native-auth0'
@@ -14,14 +15,38 @@ const App = () => {
 
     const onPress = async () => {
       try {
-        console.log('clicked')
-        await authorize()
+        await authorize({ prompt: 'login' })
       } catch (e) {
         console.log(e)
       }
     }
 
     return <Button onPress={onPress} title="Log in" />
+  }
+
+  const LogoutButton = () => {
+    const { clearSession } = useAuth0()
+
+    const onPress = async () => {
+      try {
+        await clearSession()
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    return <Button onPress={onPress} title="Log out" />
+  }
+
+  const Profile = () => {
+    const { user } = useAuth0()
+
+    return (
+      <>
+        {user && <Text>Logged in as {user.name}</Text>}
+        {!user && <Text>Not logged in</Text>}
+      </>
+    )
   }
 
   return (
@@ -32,6 +57,8 @@ const App = () => {
         <ScrollView>
           <View style={styles.container}>
             <LoginButton />
+            <Profile />
+            <LogoutButton />
           </View>
         </ScrollView>
       </SafeAreaView>

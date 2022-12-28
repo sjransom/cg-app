@@ -23,7 +23,6 @@ module.exports = {
         'no-shadow': 'off',
         '@typescript-eslint/no-shadow': 'error',
         'no-useless-escape': 2,
-        'no-console': 1,
         'no-var': 2,
         'object-curly-spacing': ['error', 'always'],
         strict: [2, 'global'],
