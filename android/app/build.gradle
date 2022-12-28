@@ -142,6 +142,9 @@ android {
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
+        // auth0
+        manifestPlaceholders = [auth0Domain: "dev-0uk7xrafzbdga67g.uk.auth0.com", auth0Scheme: "${applicationId}"]
+
         if (isNewArchitectureEnabled()) {
             // We configure the CMake build only if you decide to opt-in for the New Architecture.
             externalNativeBuild {
