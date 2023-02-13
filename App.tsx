@@ -1,16 +1,22 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import Fixtures from './src/screens/Fixtures'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-const Stack = createNativeStackNavigator()
+import Fixtures from './src/screens/Fixtures'
+import Login from './src/screens/Login'
+
+const Tab = createBottomTabNavigator()
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Fixtures" component={Fixtures} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="News" component={Login} />
+        <Tab.Screen name="Fixtures" component={Fixtures} />
+        <Tab.Screen name="Results" component={Login} />
+        <Tab.Screen name="Stats" component={Login} />
+        <Tab.Screen name="Admin" component={Login} />
+      </Tab.Navigator>
     </NavigationContainer>
   )
 }
