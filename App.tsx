@@ -1,11 +1,16 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import Login from './src/screens/Login'
+import Fixtures from './src/screens/Fixtures'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
+const Stack = createNativeStackNavigator()
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Login />
+      <Stack.Navigator>
+        <Stack.Screen name="Fixtures" component={Fixtures} />
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }
