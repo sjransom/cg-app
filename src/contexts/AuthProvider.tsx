@@ -11,8 +11,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authData, setAuthData] = useState<AuthData>()
   const loading = false // fix
 
-  const signIn = async () => {
-    const user = { username: 'sjransom@gmail.com', password: '12345' }
+  const signIn = async ({ username, password }: AuthData) => {
+    const user = { username: username, password: password }
 
     // set the data in the context so the app can be notified
     // send the user to the AuthStack

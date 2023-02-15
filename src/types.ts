@@ -6,6 +6,6 @@ export type AuthData = {
 export type AuthContextData = {
   authData?: AuthData
   loading?: boolean
-  signIn(): Promise<void>
+  signIn(params: AuthData): Promise<void>
   signOut(): void
 }
