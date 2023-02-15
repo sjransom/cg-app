@@ -2,8 +2,9 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import Fixtures from './src/screens/Fixtures'
-import Login from './src/screens/Login'
+import Fixtures from './src/screens/FixturesResults'
+import News from './src/screens/News'
+import Team from './src/screens/Team'
 
 const Tab = createBottomTabNavigator()
 
@@ -11,11 +12,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="News" component={Login} />
-        <Tab.Screen name="Fixtures" component={Fixtures} />
-        <Tab.Screen name="Results" component={Login} />
-        <Tab.Screen name="Stats" component={Login} />
-        <Tab.Screen name="Admin" component={Login} />
+        <Tab.Screen name="News" component={News} />
+        <Tab.Screen name="Fixtures/Results" component={Fixtures} />
+        <Tab.Screen name="Team" component={Team} />
       </Tab.Navigator>
     </NavigationContainer>
   )
