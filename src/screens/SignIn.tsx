@@ -38,7 +38,7 @@ export const SignIn = () => {
           />
           <Button title="Sign In" onPress={onPress} />
         </View>
-        <View>{auth.loginFail ? <Text>Login failed</Text> : null}</View>
+        <View>{auth.loginFail && <Text>Login failed</Text>}</View>
       </ScrollView>
     </SafeAreaView>
   )
