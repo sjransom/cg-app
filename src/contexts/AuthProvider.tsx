@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react'
-import { AuthContextData, AuthData } from '../types'
+import { login } from '../api/login'
+import { AuthContextData, AuthData, Login } from '../types'
 
 type AuthProviderProps = {
   children: React.ReactNode
@@ -9,14 +10,23 @@ export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authData, setAuthData] = useState<AuthData>()
+  const [loginFail, setLoginFail] = useState<boolean>(false)
   const loading = false // fix
 
-  const signIn = async ({ username, password }: AuthData) => {
-    const user = { username: username, password: password }
+  const signIn = async ({ username, password }: Login) => {
+    // login API POST request
+    const data: AuthData | false = await login(username, password)
+
+    // if API request fails then set loginFail true
+    if (!data) {
+      setLoginFail(true)
+      return
+    }
 
     // set the data in the context so the app can be notified
     // send the user to the AuthStack
-    setAuthData(user)
+    setLoginFail(false)
+    setAuthData(data)
   }
 
   const signOut = async () => {
@@ -27,7 +37,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   return (
     // this component will be used to encapsulate the whole app
     // all components will have access to the Context
-    <AuthContext.Provider value={{ authData, loading, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ authData, loginFail, loading, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )

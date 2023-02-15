@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  Text,
   TextInput,
   View
 } from 'react-native'
@@ -37,6 +38,7 @@ export const SignIn = () => {
           />
           <Button title="Sign In" onPress={onPress} />
         </View>
+        <View>{auth.loginFail ? <Text>Login failed</Text> : null}</View>
       </ScrollView>
     </SafeAreaView>
   )
