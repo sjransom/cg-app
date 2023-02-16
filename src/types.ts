@@ -15,3 +15,18 @@ export type AuthContextData = {
   signIn(params: Login): Promise<void>
   signOut(): void
 }
+
+export interface Post {
+  id: string
+  avatar: string
+  name: string
+  createdDate: string
+  image: string
+  heading: string
+  body: string
+  motm: string
+}
+
+export interface Posts {
+  posts: Post[]
+}

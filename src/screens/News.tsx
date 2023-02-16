@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native'
+import {
+  FlatList,
+  ListRenderItem,
+  SafeAreaView,
+  StyleSheet,
+  View
+} from 'react-native'
 import Config from 'react-native-config'
 import { fetchData } from '../api/fetchData'
 import NewsItem from '../components/NewsItem'
+import { Post, Posts } from '../types'
 
 const News = () => {
-  const [data, setData] = useState<any>(null) // fix any
+  const [data, setData] = useState<Post[] | null>(null)
 
   const getData = async () => {
     try {
-      const fetchedData = await fetchData(`${Config.API_URL}/newsfeed`)
-      setData(fetchedData)
+      const fetchedData: Posts = await fetchData(`${Config.API_URL}/newsfeed`)
+      setData(fetchedData.posts)
     } catch (e) {
       console.log(e, 'unable to fetch data')
     }
@@ -20,13 +27,21 @@ const News = () => {
     getData()
   }, [])
 
-  console.log(data)
+  const renderItem: ListRenderItem<Post> = ({ item }) => {
+    return <NewsItem post={item} />
+  }
 
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.container}>
-        <NewsItem />
-      </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <View>
+        {data && (
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={post => post.id}
+          />
+        )}
+      </View>
     </SafeAreaView>
   )
 }
