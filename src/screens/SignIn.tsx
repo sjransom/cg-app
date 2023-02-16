@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {
-  Button,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -8,7 +7,11 @@ import {
   TextInput,
   View
 } from 'react-native'
+import { COLORS } from '../utils/colors'
 import { useAuth } from '../hooks/useAuth'
+import { SPACING } from '../utils/spacing'
+import AppButton from '../components/AppButton'
+import AppHeader from '../components/AppHeader'
 
 export const SignIn = () => {
   const auth = useAuth()
@@ -21,6 +24,7 @@ export const SignIn = () => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
+          <AppHeader text="Login" />
           <TextInput
             style={styles.input}
             placeholder="Email"
@@ -39,7 +43,7 @@ export const SignIn = () => {
             secureTextEntry={true}
             onChangeText={(text: string) => setPassword(text)}
           />
-          <Button title="Sign In" onPress={onPress} />
+          <AppButton title="Sign In" onPress={onPress} />
         </View>
         <View>{auth.loginFail && <Text>Login failed</Text>}</View>
       </ScrollView>
@@ -49,12 +53,15 @@ export const SignIn = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    padding: SPACING.s16
   },
   input: {
     height: 40,
     borderWidth: 1,
-    padding: 10
+    borderColor: COLORS.grey,
+    marginTop: SPACING.s12,
+    padding: SPACING.s12
   }
 })
 
