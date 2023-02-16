@@ -27,7 +27,12 @@ export const SignIn = () => {
             style={styles.input}
             placeholder="Email"
             placeholderTextColor="#003f5c"
-            onChangeText={(text: string) => setUsername(text)}
+            textContentType="emailAddress"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="email"
+            onChangeText={(text: string) => setUsername(text.toLowerCase())}
           />
           <TextInput
             style={styles.input}
