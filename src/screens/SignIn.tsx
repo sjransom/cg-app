@@ -12,6 +12,7 @@ import { useAuth } from '../hooks/useAuth'
 import { SPACING } from '../utils/spacing'
 import AppButton from '../components/AppButton'
 import AppHeader from '../components/AppHeader'
+import MainLogo from '../components/MainLogo'
 
 export const SignIn = () => {
   const auth = useAuth()
@@ -24,11 +25,12 @@ export const SignIn = () => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
+          <MainLogo />
           <AppHeader text="Login" />
           <TextInput
             style={styles.input}
             placeholder="Email"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor={COLORS.grey}
             textContentType="emailAddress"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -39,7 +41,7 @@ export const SignIn = () => {
           <TextInput
             style={styles.input}
             placeholder="Password"
-            placeholderTextColor="#003f5c"
+            placeholderTextColor={COLORS.grey}
             secureTextEntry={true}
             onChangeText={(text: string) => setPassword(text)}
           />
