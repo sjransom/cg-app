@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     padding: SPACING.s12
   },
   errorContainer: {
-    marginTop: SPACING.s16,
+    marginTop: SPACING.s12,
     alignItems: 'center'
   }
 })
