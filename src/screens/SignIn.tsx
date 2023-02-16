@@ -15,9 +15,7 @@ export const SignIn = () => {
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  const onPress = () => {
-    auth.signIn({ username, password })
-  }
+  const onPress = () => auth.signIn({ username, password })
 
   return (
     <SafeAreaView>
