@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, StyleSheet, View } from 'react-native'
+import { SPACING } from '../utils/spacing'
 
 const MainLogo = () => {
   return (
@@ -14,6 +15,7 @@ const MainLogo = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginBottom: SPACING.s16,
     justifyContent: 'center',
     alignItems: 'center'
   },
