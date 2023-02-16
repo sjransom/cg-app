@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react'
 import { login } from '../api/login'
 import { AuthContextData, AuthData, Login } from '../types'
+import { storage, USER_TOKENS } from '../utils/mmkv'
 
 type AuthProviderProps = {
   children: React.ReactNode
@@ -22,6 +23,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setLoginFail(true)
       return
     }
+
+    // set the access and refresh tokens to local storage using MMKV
+    // serialize the object into a JSON string
+    storage.set(USER_TOKENS, JSON.stringify(data))
 
     // set the data in the context so the app can be notified
     // send the user to the AuthStack

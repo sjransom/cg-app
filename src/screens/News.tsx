@@ -5,7 +5,7 @@ import { fetchData } from '../api/fetchData'
 import NewsItem from '../components/NewsItem'
 
 const News = () => {
-  const [data, setData] = useState<any>(null)
+  const [data, setData] = useState<any>(null) // fix any
 
   const getData = async () => {
     try {
