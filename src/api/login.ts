@@ -1,5 +1,4 @@
 import Config from 'react-native-config'
-// import { AuthData } from '../types'
 
 export const login = async (username: string, password: string) => {
   try {
