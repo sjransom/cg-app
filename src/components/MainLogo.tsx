@@ -16,7 +16,6 @@ const MainLogo = () => {
 const styles = StyleSheet.create({
   container: {
     marginBottom: SPACING.s16,
-    justifyContent: 'center',
     alignItems: 'center'
   },
   image: {
