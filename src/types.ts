@@ -3,6 +3,12 @@ export type AuthData = {
   refreshToken: string
 }
 
+export type UserData = {
+  id: string
+  name: string
+  username: string
+}
+
 export type LoginParams = {
   username: string
   password: string
@@ -10,6 +16,7 @@ export type LoginParams = {
 
 export type AuthContextData = {
   authData?: AuthData
+  userData?: UserData
   loginFail?: boolean
   loading?: boolean
   signIn(params: LoginParams): Promise<void>

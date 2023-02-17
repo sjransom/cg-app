@@ -1,7 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react'
+import Config from 'react-native-config'
+import { fetchData } from '../api/fetchData'
 import { login } from '../api/login'
 import { logout } from '../api/logout'
-import { AuthContextData, AuthData, LoginParams } from '../types'
+import { AuthContextData, AuthData, LoginParams, UserData } from '../types'
 import { storage, USER_TOKENS } from '../utils/mmkv'
 
 type AuthProviderProps = {
@@ -12,6 +14,7 @@ export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authData, setAuthData] = useState<AuthData>()
+  const [userData, setUserData] = useState<UserData>()
   const [loginFail, setLoginFail] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -42,10 +45,19 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // set the data in the context so the app can be notified
     // send the user to the AuthStack
     setAuthData(tokens)
-
     setLoginFail(false)
+
+    // API request to /users
+    try {
+      const data: UserData = await fetchData(`${Config.API_URL}/users`)
+      setUserData(data)
+    } catch (e) {
+      console.log(e, 'unable to get user data')
+    }
     setLoading(false)
   }
+
+  console.log(userData, 'userData')
 
   const signOut = async () => {
     // logout API call to delete current refreshToken
@@ -60,7 +72,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // this component will be used to encapsulate the whole app
     // all components will have access to the Context
     <AuthContext.Provider
-      value={{ authData, loginFail, loading, signIn, signOut }}>
+      value={{ authData, userData, loginFail, loading, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )
