@@ -19,11 +19,23 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    // check internal storage for access/refresh tokens
     if (storage.contains(USER_TOKENS)) {
       const tokens = storage.getString(USER_TOKENS)
       const tokensObject = tokens && JSON.parse(tokens)
       setAuthData(tokensObject)
     }
+
+    // API request to /users
+    const fetchUsers = async () => {
+      try {
+        const data: UserData = await fetchData(`${Config.API_URL}/users`)
+        setUserData(data)
+      } catch (e) {
+        console.log(e, 'unable to get user data')
+      }
+    }
+    fetchUsers()
   }, [])
 
   const signIn = async ({ username, password }: LoginParams) => {
@@ -45,15 +57,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // set the data in the context so the app can be notified
     // send the user to the AuthStack
     setAuthData(tokens)
-    setLoginFail(false)
 
-    // API request to /users
-    try {
-      const data: UserData = await fetchData(`${Config.API_URL}/users`)
-      setUserData(data)
-    } catch (e) {
-      console.log(e, 'unable to get user data')
-    }
+    setLoginFail(false)
     setLoading(false)
   }
 
