@@ -21,10 +21,10 @@ export interface Post {
   avatar: string
   name: string
   createdDate: string
-  image: string
+  image?: string
   heading: string
   body: string
-  motm: string
+  motm?: string
 }
 
 export interface Posts {
