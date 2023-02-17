@@ -34,7 +34,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const tokens = storage.getString(USER_TOKENS)
       const tokensObject = tokens && JSON.parse(tokens)
       setAuthData(tokensObject)
-      fetchUsers()
+
+      // fetch user data
+      const userFetch = async () => await fetchUsers()
+      userFetch()
     }
   }, [])
 
