@@ -1,12 +1,14 @@
 import React from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import AppHeader from '../components/AppHeader'
+import { SPACING } from '../utils/spacing'
 
 const Fixtures = () => {
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.container}>
-          <Text>Fixtures</Text>
+          <AppHeader text="Fixtures and Results" />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -15,7 +17,8 @@ const Fixtures = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    padding: SPACING.s16
   }
 })
 

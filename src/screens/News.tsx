@@ -17,7 +17,7 @@ import { Post, Posts } from '../types'
 import { SPACING } from '../utils/spacing'
 
 const News = () => {
-  const { loading } = useAuth()
+  const { userData, loading } = useAuth()
   const [data, setData] = useState<Post[] | null>(null)
   const [error, setError] = useState<boolean>(false)
 
@@ -44,7 +44,8 @@ const News = () => {
   return (
     <SafeAreaView>
       <View style={styles.header}>
-        <AppHeader text="Latest News" />
+        <AppHeader text={`Welcome, ${userData ? userData.name : 'player'}!`} />
+        <Text style={styles.subHeading}>Latest news</Text>
       </View>
       <View style={styles.body}>
         {data && !error && (
@@ -67,10 +68,14 @@ const styles = StyleSheet.create({
     marginVertical: SPACING.s12,
     marginHorizontal: SPACING.s16
   },
+  subHeading: {
+    marginTop: SPACING.s12,
+    fontSize: 20
+  },
   body: {
     padding: SPACING.s16,
     paddingTop: 0,
-    paddingBottom: 120
+    paddingBottom: 170
   }
 })
 
