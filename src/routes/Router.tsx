@@ -3,18 +3,11 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import { AppStack } from './AppStack'
 import { AuthStack } from './AuthStack'
-import Loading from '../components/Loading'
 import { useAuth } from '../hooks/useAuth'
 
-// this Router will use the useAuth hook to decide which correct stack to display
-// it will show a Loading component if data is not ready.
-
+// router will use the useAuth hook to decide which correct stack to display
 export const Router = () => {
-  const { authData, loading } = useAuth()
-
-  if (loading) {
-    return <Loading />
-  }
+  const { authData } = useAuth()
 
   return (
     <NavigationContainer>
