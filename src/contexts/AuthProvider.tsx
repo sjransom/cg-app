@@ -27,22 +27,23 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(true)
 
     // login API POST request
-    const data: AuthData | false = await login(username, password)
+    const tokens: AuthData | false = await login(username, password)
 
     // if API request fails then set loginFail true
-    if (!data) {
+    if (!tokens) {
       setLoginFail(true)
       return
     }
 
     // set the access and refresh tokens to local storage using MMKV
     // serialize the object into a JSON string
-    storage.set(USER_TOKENS, JSON.stringify(data))
+    storage.set(USER_TOKENS, JSON.stringify(tokens))
 
     // set the data in the context so the app can be notified
     // send the user to the AuthStack
+    setAuthData(tokens)
+
     setLoginFail(false)
-    setAuthData(data)
     setLoading(false)
   }
 
