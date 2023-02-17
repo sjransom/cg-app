@@ -12,9 +12,11 @@ export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authData, setAuthData] = useState<AuthData>()
   const [loginFail, setLoginFail] = useState<boolean>(false)
-  const loading = false // fix
+  const [loading, setLoading] = useState<boolean>(false)
 
   const signIn = async ({ username, password }: Login) => {
+    setLoading(true)
+
     // login API POST request
     const data: AuthData | false = await login(username, password)
 
@@ -32,11 +34,14 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // send the user to the AuthStack
     setLoginFail(false)
     setAuthData(data)
+    setLoading(false)
   }
 
   const signOut = async () => {
     // remove data from context
     setAuthData(undefined)
+    // delete tokens from storage
+    storage.delete(USER_TOKENS)
   }
 
   return (
