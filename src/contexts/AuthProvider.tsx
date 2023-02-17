@@ -1,6 +1,6 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { login } from '../api/login'
-import { AuthContextData, AuthData, Login } from '../types'
+import { AuthContextData, AuthData, LoginParams } from '../types'
 import { storage, USER_TOKENS } from '../utils/mmkv'
 
 type AuthProviderProps = {
@@ -14,7 +14,15 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loginFail, setLoginFail] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
-  const signIn = async ({ username, password }: Login) => {
+  useEffect(() => {
+    if (storage.contains(USER_TOKENS)) {
+      const tokens = storage.getString(USER_TOKENS)
+      const tokensObject = tokens && JSON.parse(tokens)
+      setAuthData(tokensObject)
+    }
+  }, [])
+
+  const signIn = async ({ username, password }: LoginParams) => {
     setLoading(true)
 
     // login API POST request
