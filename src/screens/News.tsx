@@ -42,13 +42,15 @@ const News = () => {
 
   return (
     <SafeAreaView>
+      <View style={styles.header}>
+        <AppHeader text="Latest News" />
+      </View>
       <View style={styles.container}>
         {data && !error && (
           <FlatList
             data={data}
             renderItem={renderItem}
             keyExtractor={post => post.id}
-            ListHeaderComponent={<AppHeader text="Latest News" />}
             showsVerticalScrollIndicator={false}
           />
         )}
@@ -60,8 +62,14 @@ const News = () => {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    marginVertical: SPACING.s12,
+    marginHorizontal: SPACING.s16
+  },
   container: {
-    padding: SPACING.s16
+    padding: SPACING.s16,
+    paddingTop: 0,
+    paddingBottom: 120
   }
 })
 

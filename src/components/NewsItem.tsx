@@ -34,7 +34,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ post }) => {
 
 const styles = StyleSheet.create({
   card: {
-    marginTop: SPACING.s32,
+    marginTop: SPACING.s12,
     padding: SPACING.s12,
     backgroundColor: COLORS.white
   },

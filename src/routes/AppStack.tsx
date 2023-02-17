@@ -12,6 +12,7 @@ const Tab = createBottomTabNavigator()
 export const AppStack = () => {
   return (
     <Tab.Navigator
+      //safeAreaInsets={{ top: 0 }}
       screenOptions={{
         headerTransparent: true,
         headerShadowVisible: false,
