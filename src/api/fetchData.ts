@@ -1,13 +1,8 @@
-import { storage, USER_TOKENS } from '../utils/mmkv'
-
-// retrieve user accessTokens from MMKV storage
-// deserialize the JSON string into an object
-const tokens = storage.getString(USER_TOKENS)
-const tokensObject = tokens && JSON.parse(tokens)
+import { tokensFromStorage } from './utils'
 
 const options = {
   headers: {
-    Authorization: tokensObject.accessToken
+    Authorization: tokensFromStorage.accessToken
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { login } from '../api/login'
+import { logout } from '../api/logout'
 import { AuthContextData, AuthData, LoginParams } from '../types'
 import { storage, USER_TOKENS } from '../utils/mmkv'
 
@@ -46,6 +47,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }
 
   const signOut = async () => {
+    // logout API call to delete current refreshToken
+    await logout()
     // remove data from context
     setAuthData(undefined)
     // delete tokens from storage
