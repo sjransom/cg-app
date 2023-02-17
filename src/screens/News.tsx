@@ -32,6 +32,7 @@ const News = () => {
     }
   }
 
+  // empty depedency array as only needs to run once
   useEffect(() => {
     getData()
   }, [])
