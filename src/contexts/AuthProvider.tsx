@@ -18,24 +18,24 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loginFail, setLoginFail] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
 
+  // API request to users endpoints
+  const fetchUsers = async () => {
+    try {
+      const data: UserData = await fetchData(`${Config.API_URL}/users`)
+      setUserData(data)
+    } catch (e) {
+      console.log(e, 'unable to get user data')
+    }
+  }
+
   useEffect(() => {
     // check internal storage for access/refresh tokens
     if (storage.contains(USER_TOKENS)) {
       const tokens = storage.getString(USER_TOKENS)
       const tokensObject = tokens && JSON.parse(tokens)
       setAuthData(tokensObject)
+      fetchUsers()
     }
-
-    // API request to /users
-    const fetchUsers = async () => {
-      try {
-        const data: UserData = await fetchData(`${Config.API_URL}/users`)
-        setUserData(data)
-      } catch (e) {
-        console.log(e, 'unable to get user data')
-      }
-    }
-    fetchUsers()
   }, [])
 
   const signIn = async ({ username, password }: LoginParams) => {
@@ -58,11 +58,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // send the user to the AuthStack
     setAuthData(tokens)
 
+    // fetch user info
+    await fetchUsers()
+
+    // set loading and fail flags to false
     setLoginFail(false)
     setLoading(false)
   }
-
-  console.log(userData, 'userData')
 
   const signOut = async () => {
     // logout API call to delete current refreshToken
