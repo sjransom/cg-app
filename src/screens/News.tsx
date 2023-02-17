@@ -45,7 +45,7 @@ const News = () => {
       <View style={styles.header}>
         <AppHeader text="Latest News" />
       </View>
-      <View style={styles.container}>
+      <View style={styles.body}>
         {data && !error && (
           <FlatList
             data={data}
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     marginVertical: SPACING.s12,
     marginHorizontal: SPACING.s16
   },
-  container: {
+  body: {
     padding: SPACING.s16,
     paddingTop: 0,
     paddingBottom: 120
