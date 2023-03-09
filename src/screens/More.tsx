@@ -3,8 +3,8 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import AppButton from '../components/AppButton'
 import AppHeader from '../components/AppHeader'
 import { useAuth } from '../hooks/useAuth'
-import { SPACING } from '../utils/spacing'
 import { UserData } from '../types'
+import { SPACING } from '../utils/spacing'
 
 const More = () => {
   const auth = useAuth()

@@ -6,12 +6,12 @@ import {
   TextInput,
   View
 } from 'react-native'
-import { COLORS } from '../utils/colors'
-import { useAuth } from '../hooks/useAuth'
-import { SPACING } from '../utils/spacing'
 import AppButton from '../components/AppButton'
-import MainLogo from '../components/MainLogo'
 import ErrorMessage from '../components/ErrorMessage'
+import MainLogo from '../components/MainLogo'
+import { useAuth } from '../hooks/useAuth'
+import { COLORS } from '../utils/colors'
+import { SPACING } from '../utils/spacing'
 
 export const SignIn = () => {
   const auth = useAuth()
